@@ -180,17 +180,25 @@ async function share(p){
   const url=location.href.split("#")[0]+"#post="+p.id;
   try{ if(navigator.share) await navigator.share({title:p.title,url}); else {await navigator.clipboard.writeText(url);msg("लिंक कॉपी हो गया।")} }catch{}
 }
-function like(p,b){
-  liked.has(p.id)?liked.delete(p.id):liked.add(p.id);
+let did=null;
+try{did=localStorage.getItem("did");if(!did){did=(crypto.randomUUID?crypto.randomUUID():String(Math.random()).slice(2)+Date.now()).replace(/-/g,"");localStorage.setItem("did",did)}}catch{did=String(Math.random()).slice(2)+Date.now()}
+async function like(p,b){
+  const on=!liked.has(p.id);
+  on?liked.add(p.id):liked.delete(p.id);
+  p.likes=Math.max(0,(p.likes||0)+(on?1:-1));
+  b.textContent=(on?"♥ ":"♡ ")+p.likes;
   try{localStorage.setItem("liked",JSON.stringify([...liked]))}catch{}
-  b.textContent=(liked.has(p.id)?"♥ ":"♡ ")+(liked.has(p.id)?1:0);
+  try{
+    const r=await (await fetch(WORKER+"/like",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({id:p.id,d:did,delta:on?1:-1})})).json();
+    if(typeof r.likes==="number"){p.likes=r.likes;b.textContent=(on?"♥ ":"♡ ")+r.likes}
+  }catch{}
 }
 function render(){
   const g=$("#grid");g.textContent="";
   const list=posts.filter(p=>(cat==="सभी"||p.cat===cat)&&(!qs||(p.title+p.excerpt).includes(qs)));
   if(!list.length){g.append(el("div","empty",posts.length?"इस खोज में कोई खबर नहीं मिली।":"AI संपादक अभी नई खबरें तैयार कर रहा है। कुछ मिनट बाद पेज दोबारा खोलें।"));return}
   list.forEach(p=>{
-    const c=el("article","card"),m=media(p,"media"),t=el("div","tools"),lb=el("button",null,(liked.has(p.id)?"♥ 1":"♡ 0")),sb=el("button",null,"↗ शेयर");
+    const c=el("article","card"),m=media(p,"media"),t=el("div","tools"),lb=el("button",null,(liked.has(p.id)?"♥ ":"♡ ")+(p.likes||0)),sb=el("button",null,"↗ शेयर");
     lb.onclick=()=>like(p,lb);sb.onclick=()=>share(p);t.append(lb,sb);m.append(t);
     const b=el("div","cbody"),h=el("h3"),a=el("a",null,p.title);a.href="#post="+p.id;h.append(a);
     const mt=el("div","meta"),by=el("b",null,"AI संपादक");mt.append("by ",by," · "+fdate(p.time));
