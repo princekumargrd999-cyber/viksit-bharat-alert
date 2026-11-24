@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>विकसित भारत अलर्ट | AI से बनी भारत की खबरें</title>
+<meta name="description" content="AI संपादक विकसित भारत से जुड़ी हर बड़ी खबर पढ़कर उसका शीर्षक और पूरा लेख लिखता है, और आपको तुरंत नोटिफिकेशन भेजता है।">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+Devanagari:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b1020;--bar:#10162b;--card:#151c33;--line:#232c4a;--tx:#e8ecf8;--mut:#98a2c3;--gold:#f0b90b;--purple:#6d35d8;--teal:#16806f;--blue:#2563eb}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.65 Inter,"Noto Sans Devanagari",system-ui,sans-serif}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 20px}
+.mini{font-size:14px;color:var(--mut);border-bottom:1px solid var(--line)}
+.mini .wrap{display:flex;justify-content:space-between;padding-top:9px;padding-bottom:9px;gap:12px;flex-wrap:wrap}
+.mini a{margin-right:18px}
+header.main{background:var(--bar);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+header.main .wrap{display:flex;align-items:center;gap:28px;height:72px}
+.logo{font-weight:800;font-size:22px;line-height:1.1}
+.logo small{display:block;font-size:12px;color:var(--gold);font-weight:600;letter-spacing:.04em}
+nav{display:flex;gap:26px;font-weight:600;flex:1}
+nav a:hover{color:var(--gold)}
+.sbox{display:flex;background:#0b1020;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.sbox input{background:none;border:0;color:var(--tx);padding:9px 14px;width:200px;font:inherit}
+.btn{border:0;border-radius:999px;padding:12px 24px;font-weight:700;color:#fff;background:var(--purple)}
+.btn.gold{background:var(--gold);color:#1a1400}
+.btn:hover{filter:brightness(1.12)}
+.ticker{background:#0e1428;border-bottom:1px solid var(--line);overflow:hidden;white-space:nowrap;font-size:15px}
+.ticker b{background:var(--gold);color:#1a1400;padding:7px 16px;position:absolute;z-index:2}
+.ticker div{display:inline-block;padding:7px 0 7px 130px;animation:run 70s linear infinite}
+.ticker span{margin-right:48px;color:var(--mut)}
+@keyframes run{to{transform:translateX(-50%)}}
+.hero{padding:54px 0 34px;display:grid;grid-template-columns:1.3fr 1fr;gap:34px;align-items:center}
+.hero h1{font-size:clamp(34px,5.4vw,60px);line-height:1.12;margin:0 0 16px;font-weight:800}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero p{color:var(--mut);font-size:19px;max-width:36em}
+.hero .row{display:flex;gap:14px;flex-wrap:wrap;margin-top:22px;align-items:center}
+#msg{margin:14px 0 0;min-height:1.6em;font-weight:600;color:var(--gold)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px}
+.stat b{display:block;font-size:34px;color:var(--gold);line-height:1.1}
+.stat span{color:var(--mut);font-size:15px}
+.layout{display:grid;grid-template-columns:1fr 330px;gap:30px;padding-bottom:50px}
+.head{display:flex;align-items:center;justify-content:space-between;background:#1a2342;border-radius:6px 0 0 6px;margin-bottom:22px;font-weight:700;padding-left:14px}
+.head i{font-style:normal;background:var(--gold);color:#1a1400;padding:9px 18px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 22px}
+.chips button{background:var(--card);color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:7px 16px}
+.chips button[aria-pressed=true]{background:var(--gold);color:#1a1400;border-color:var(--gold);font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:22px}
+.card{position:relative;background:var(--card);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;border:1px solid transparent}
+.card:hover{border-color:var(--gold)}
+.media{height:190px;background:linear-gradient(135deg,#1c2a55,#0f4c5c);display:grid;place-items:center;font-size:62px;position:relative}
+.media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tools{position:absolute;top:12px;left:12px;right:12px;display:flex;justify-content:space-between;z-index:3}
+.tools button{background:rgba(10,14,28,.78);color:var(--tx);border:0;border-radius:999px;padding:6px 13px;font-size:14px;font-weight:600}
+.cbody{padding:20px 20px 16px;flex:1;display:flex;flex-direction:column}
+.cat{font-size:13px;color:var(--gold);font-weight:700}
+.card h3{margin:4px 0 8px;font-size:21px;line-height:1.3}
+.card h3 a::after{content:"";position:absolute;inset:0;z-index:1}
+.card p{margin:0 0 14px;color:var(--mut);font-size:15.5px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.meta{margin-top:auto;border-top:1px solid var(--line);padding-top:12px;font-size:13.5px;color:var(--mut)}
+.meta b{color:var(--gold)}
+.empty{grid-column:1/-1;background:var(--card);border-radius:22px;padding:34px;text-align:center;color:var(--mut)}
+aside .box{background:var(--card);border-radius:22px;padding:22px;margin-bottom:22px}
+aside h4{margin:0 0 12px;font-size:16px;background:#1a2342;padding:9px 14px;border-radius:4px}
+aside .btn{width:100%}
+.cl a{display:flex;justify-content:space-between;padding:9px 4px;border-bottom:1px solid var(--line);cursor:pointer;color:var(--mut)}
+.cl a:hover{color:var(--gold)}
+.sec{padding:56px 0;border-top:1px solid var(--line)}
+.sec h2{font-size:clamp(28px,4vw,40px);margin:0 0 10px}
+.sec .lead{color:var(--mut);max-width:44em;margin:0 0 28px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.step{background:var(--card);border-radius:20px;padding:24px}
+.step .ic{font-size:36px}
+.step h3{margin:8px 0 6px;font-size:20px}
+.step p{margin:0;color:var(--mut);font-size:15.5px}
+details{background:var(--card);border-radius:14px;padding:14px 20px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:700}
+details p{color:var(--mut);margin:10px 0 0}
+footer{background:var(--bar);border-top:1px solid var(--line);padding:30px 0;color:var(--mut);font-size:15px}
+#view{position:fixed;inset:0;background:var(--bg);overflow:auto;z-index:50}
+#view[hidden]{display:none}
+.art{max-width:780px;margin:0 auto;padding:24px 20px 80px}
+.art .back{background:var(--card);color:var(--tx);border:1px solid var(--line);border-radius:999px;padding:9px 18px;margin-bottom:22px}
+.art .hm{height:340px;border-radius:24px;overflow:hidden;background:linear-gradient(135deg,#1c2a55,#0f4c5c);display:grid;place-items:center;font-size:90px;position:relative;margin-bottom:22px}
+.art .hm img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.art h1{font-size:clamp(28px,5vw,44px);line-height:1.2;margin:6px 0 10px}
+.art .by{color:var(--mut);font-size:15px;margin-bottom:24px}
+.art p{font-size:19px;line-height:1.85;margin:0 0 20px}
+.art .src{background:var(--card);border-radius:16px;padding:16px 20px;font-size:15px;color:var(--mut)}
+.art .src a{color:var(--gold);font-weight:700}
+.art .acts{display:flex;gap:10px;margin:24px 0}
+@media(max-width:960px){.layout,.hero{grid-template-columns:1fr}nav,.sbox{display:none}}
+@media(prefers-reduced-motion:reduce){.ticker div{animation:none}.ticker{overflow-x:auto}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="mini"><div class="wrap"><div><a href="#top">होम</a><a href="#about">हमारे बारे में</a><a href="#faq">सवाल-जवाब</a></div><div>RSBVP 2026–27 · AI for Better Life</div></div></div>
+<header class="main"><div class="wrap">
+<a class="logo" href="#top">विकसित भारत अलर्ट<small>AI NEWS ROOM</small></a>
+<nav><a href="#news">ताज़ा खबरें</a><a href="#how">कैसे काम करता है</a><a href="#about">हमारे बारे में</a><a href="#faq">सवाल-जवाब</a></nav>
+<div class="sbox"><input id="q" type="search" placeholder="खबर खोजें…" aria-label="खबर खोजें"></div>
+<button class="btn gold sub">🔔 अलर्ट चालू करें</button>
+</div></header>
+<div class="ticker" aria-label="ताज़ा शीर्षक"><b>अभी</b><div id="tick"><span>AI संपादक खबरें जाँच रहा है…</span></div></div>
+
+<main id="top"><div class="wrap">
+<section class="hero">
+<div>
+<h1>देश में कुछ नया हुआ? <em>पहले आपको</em> पता चलेगा।</h1>
+<p>हमारा AI संपादक भारत और दुनिया की खबरें हर कुछ मिनट में पढ़ता है। जो विकसित भारत से जुड़ी हैं, उनका शीर्षक और पूरा लेख खुद लिखता है, पोस्ट करता है और आपके फोन पर तुरंत नोटिफिकेशन भेजता है।</p>
+<div class="row"><button class="btn gold sub">🔔 अलर्ट चालू करें</button><a class="btn" href="#news">खबरें पढ़ें</a></div>
+<p id="msg" role="status"></p>
+</div>
+<div class="stats">
+<div class="stat"><b id="n1">0</b><span>AI द्वारा लिखी खबरें</span></div>
+<div class="stat"><b id="n2">0</b><span>श्रेणियाँ</span></div>
+<div class="stat"><b>24×7</b><span>हर 10 मिनट में जाँच</span></div>
+<div class="stat"><b>तुरंत</b><span>फोन पर नोटिफिकेशन</span></div>
+</div>
+</section>
+
+<div class="layout" id="news">
+<div>
+<div class="head">ताज़ा खबरें<i>सभी</i></div>
+<div class="chips" id="chips"></div>
+<div class="grid" id="grid"><div class="empty">खबरें लोड हो रही हैं…</div></div>
+</div>
+<aside>
+<div class="box"><h4>🔔 नोटिफिकेशन</h4><p style="color:var(--mut);margin:0 0 14px;font-size:15.5px">हर नई खबर सबसे पहले आपके फोन या कंप्यूटर पर।</p><button class="btn sub">अलर्ट चालू करें</button></div>
+<div class="box"><h4>श्रेणियाँ</h4><div class="cl" id="cl"></div></div>
+<div class="box"><h4>AI किन खबरों को चुनता है?</h4><p style="color:var(--mut);margin:0;font-size:15.5px">AI और टेक्नोलॉजी, नए आविष्कार और खोज, शिक्षा, स्वच्छ ऊर्जा, स्वास्थ्य, खेती और गाँव, आपदा प्रबंधन और अर्थव्यवस्था। अपराध, गॉसिप और राजनीतिक झगड़े छोड़ दिए जाते हैं।</p></div>
+</aside>
+</div>
+
+<section class="sec" id="how"><h2>यह कैसे काम करता है</h2><p class="lead">पूरा काम AI खुद करता है। कोई इंसान खबर नहीं लिखता।</p>
+<div class="steps">
+<div class="step"><div class="ic">🔎</div><h3>1. खबरें खोजता है</h3><p>AI देश के कई बड़े समाचार स्रोत हर 10 मिनट में जाँचता है।</p></div>
+<div class="step"><div class="ic">🧠</div><h3>2. चुनता है</h3><p>हर खबर पढ़कर तय करता है कि वह विकसित भारत से जुड़ी है या नहीं।</p></div>
+<div class="step"><div class="ic">✍️</div><h3>3. लेख लिखता है</h3><p>पहले हिंदी शीर्षक बनाता है, फिर पूरी खबर की जानकारी लिखकर पोस्ट करता है।</p></div>
+<div class="step"><div class="ic">🔔</div><h3>4. अलर्ट भेजता है</h3><p>पोस्ट छपते ही सभी सब्सक्राइबर को नोटिफिकेशन जाता है। उस पर दबाने से पूरी खबर खुलती है।</p></div>
+</div></section>
+
+<section class="sec" id="about"><h2>हमारे बारे में</h2>
+<p class="lead">यह प्रोजेक्ट राज्य स्तरीय बाल वैज्ञानिक प्रदर्शनी (RSBVP) 2026–27 की थीम "विज्ञान, प्रौद्योगिकी और नवाचार: सतत और विकसित भारत के लिए" के उप-विषय <b>"बेहतर जीवन के लिए कृत्रिम बुद्धिमत्ता (AI)"</b> पर बनाया गया है। यहाँ AI खबरों का संपादक है: वह पढ़ता है, छाँटता है, लिखता है और लोगों तक पहुँचाता है।</p>
+<p class="lead">AI गलती भी कर सकता है, इसलिए हर लेख के नीचे मूल खबर का लिंक दिया गया है। कोई भी बड़ी बात मूल स्रोत से जाँच लें।</p></section>
+
+<section class="sec" id="faq"><h2>सवाल-जवाब</h2>
+<details><summary>क्या सभी खबरें AI लिखता है?</summary><p>हाँ। शीर्षक, सार और पूरा लेख AI लिखता है। वह सिर्फ मूल खबर में दी गई जानकारी का इस्तेमाल करता है और अपनी तरफ से आँकड़े नहीं जोड़ता।</p></details>
+<details><summary>नोटिफिकेशन कैसे मिलेगा?</summary><p>"अलर्ट चालू करें" दबाकर अनुमति दें। iPhone पर पहले साइट को Home Screen में जोड़ना पड़ता है।</p></details>
+<details><summary>नोटिफिकेशन बंद कैसे करें?</summary><p>ब्राउज़र की साइट सेटिंग में जाकर इस साइट के नोटिफिकेशन "Block" कर दें।</p></details>
+<details><summary>AI कौन सी खबरें नहीं चुनता?</summary><p>अपराध, फिल्मी गॉसिप, खेल की अफवाहें और राजनीतिक बहस वाली खबरें छोड़ दी जाती हैं।</p></details>
+</section>
+</div></main>
+
+<footer><div class="wrap">Designed and developed by Pro Prince · RSBVP 2026–27 · AI for Better Life</div></footer>
+<div id="view" hidden><div class="art" id="art"></div></div>
+
+<script>
+const WORKER="https://viksit-alert.princekumargrd999.workers.dev";
+const ICON={"AI और टेक्नोलॉजी":"🤖","आविष्कार और खोज":"💡","शिक्षा":"📚","ऊर्जा और पर्यावरण":"🌱","स्वास्थ्य":"🩺","खेती और गाँव":"🌾","अर्थव्यवस्था":"📈","आपदा प्रबंधन":"🛟","देश":"🇮🇳"};
+const $=s=>document.querySelector(s);
+const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+let posts=[],cat="सभी",qs="",liked=new Set();
+try{liked=new Set(JSON.parse(localStorage.getItem("liked")||"[]"))}catch{}
+const icon=p=>ICON[p.cat]||"📰";
+const fdate=t=>new Date(t).toLocaleDateString("hi-IN",{day:"numeric",month:"long",year:"numeric"});
+const safe=u=>/^https?:\/\//.test(u||"")?u:"";
+
+function media(p,cls){
+  const m=el("div",cls);m.append(icon(p));
+  if(safe(p.image)){const i=new Image();i.src=p.image;i.alt="";i.loading="lazy";i.referrerPolicy="no-referrer";i.onerror=()=>i.remove();m.append(i)}
+  return m;
+}
+async function share(p){
+  const url=location.href.split("#")[0]+"#post="+p.id;
+  try{ if(navigator.share) await navigator.share({title:p.title,url}); else {await navigator.clipboard.writeText(url);msg("लिंक कॉपी हो गया।")} }catch{}
+}
+function like(p,b){
+  liked.has(p.id)?liked.delete(p.id):liked.add(p.id);
+  try{localStorage.setItem("liked",JSON.stringify([...liked]))}catch{}
+  b.textContent=(liked.has(p.id)?"♥ ":"♡ ")+(liked.has(p.id)?1:0);
+}
+function render(){
+  const g=$("#grid");g.textContent="";
+  const list=posts.filter(p=>(cat==="सभी"||p.cat===cat)&&(!qs||(p.title+p.excerpt).includes(qs)));
+  if(!list.length){g.append(el("div","empty",posts.length?"इस खोज में कोई खबर नहीं मिली।":"AI संपादक अभी नई खबरें तैयार कर रहा है। कुछ मिनट बाद पेज दोबारा खोलें।"));return}
+  list.forEach(p=>{
+    const c=el("article","card"),m=media(p,"media"),t=el("div","tools"),lb=el("button",null,(liked.has(p.id)?"♥ 1":"♡ 0")),sb=el("button",null,"↗ शेयर");
+    lb.onclick=()=>like(p,lb);sb.onclick=()=>share(p);t.append(lb,sb);m.append(t);
+    const b=el("div","cbody"),h=el("h3"),a=el("a",null,p.title);a.href="#post="+p.id;h.append(a);
+    const mt=el("div","meta"),by=el("b",null,"AI संपादक");mt.append("by ",by," · "+fdate(p.time));
+    b.append(el("span","cat",icon(p)+" "+p.cat),h,el("p",null,p.excerpt),mt);c.append(m,b);g.append(c);
+  });
+}
+function side(){
+  const counts={};posts.forEach(p=>counts[p.cat]=(counts[p.cat]||0)+1);
+  const names=Object.keys(counts);
+  const chips=$("#chips");chips.textContent="";
+  ["सभी",...names].forEach(n=>{const b=el("button",null,n);b.setAttribute("aria-pressed",n===cat);b.onclick=()=>{cat=n;side();render()};chips.append(b)});
+  const cl=$("#cl");cl.textContent="";
+  if(!names.length)cl.append(el("span",null,"अभी कोई श्रेणी नहीं"));
+  names.forEach(n=>{const a=el("a");a.append(el("span",null,(ICON[n]||"📰")+" "+n),el("span",null,String(counts[n])));a.onclick=()=>{cat=n;side();render();$("#news").scrollIntoView()};cl.append(a)});
+  $("#n1").textContent=posts.length;$("#n2").textContent=names.length;
+  const tk=$("#tick");tk.textContent="";
+  const items=posts.slice(0,10).map(p=>"• "+p.title);
+  (items.length?items.concat(items):["AI संपादक खबरें जाँच रहा है…"]).forEach(x=>tk.append(el("span",null,x)));
+}
+function open(){
+  const m=location.hash.match(/post=([a-f0-9]+)/),v=$("#view");
+  if(!m){v.hidden=true;document.body.style.overflow="";return}
+  const p=posts.find(x=>x.id===m[1]);if(!p)return;
+  const a=$("#art");a.textContent="";
+  const back=el("button","back","← सभी खबरें");back.onclick=()=>{history.pushState("",document.title,location.pathname);open()};
+  const by=el("div","by");by.append("by ");by.append(el("b",null,"AI संपादक"));by.append(" · "+fdate(p.time)+" · "+p.cat);
+  a.append(back,media(p,"hm"),el("h1",null,p.title),by);
+  (p.body||[p.excerpt]).forEach(x=>a.append(el("p",null,x)));
+  const acts=el("div","acts"),sb=el("button","btn","↗ शेयर करें");sb.onclick=()=>share(p);acts.append(sb);
+  const s=el("div","src");s.append("यह लेख AI ने लिखा है। मूल खबर: ");
+  if(safe(p.link)){const l=el("a",null,p.srcName||"स्रोत");l.href=p.link;l.target="_blank";l.rel="noopener";s.append(l)}
+  a.append(acts,s);v.hidden=false;v.scrollTop=0;document.body.style.overflow="hidden";document.title=p.title;
+}
+async function load(){
+  try{posts=await (await fetch(WORKER+"/posts")).json()}catch{posts=[]}
+  side();render();open();
+}
+$("#q").addEventListener("input",e=>{qs=e.target.value.trim();render()});
+window.addEventListener("hashchange",open);
+addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#view").hidden){history.pushState("",document.title,location.pathname);open()}});
+
+const msg=t=>$("#msg").textContent=t;
+const b64=s=>{const p="=".repeat((4-s.length%4)%4);return Uint8Array.from(atob((s+p).replace(/-/g,"+").replace(/_/g,"/")),c=>c.charCodeAt(0))};
+async function subscribe(){
+  if(!("serviceWorker" in navigator)||!("PushManager" in window))return msg("इस ब्राउज़र में नोटिफिकेशन नहीं चलते। Chrome इस्तेमाल करें (iPhone पर पहले साइट को Home Screen में जोड़ें)।");
+  try{
+    if(await Notification.requestPermission()!=="granted")return msg("नोटिफिकेशन की अनुमति नहीं मिली।");
+    const reg=await navigator.serviceWorker.register("sw.js");await navigator.serviceWorker.ready;
+    const {key}=await (await fetch(WORKER+"/vapid")).json();
+    const sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64(key)});
+    await fetch(WORKER+"/subscribe",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(sub)});
+    msg("अलर्ट चालू हो गया ✓ अब हर नई खबर आपके फोन पर आएगी।");
+    document.querySelectorAll(".sub").forEach(b=>b.textContent="✓ अलर्ट चालू है");
+  }catch{msg("कुछ गड़बड़ हुई। दोबारा कोशिश करें।")}
+}
+document.querySelectorAll(".sub").forEach(b=>b.onclick=subscribe);
+load();setInterval(async()=>{try{const n=await (await fetch(WORKER+"/posts")).json();if(n.length&&n[0].id!==(posts[0]||{}).id){posts=n;side();render()}}catch{}},60000);
+</script>
+</body>
+</html>
